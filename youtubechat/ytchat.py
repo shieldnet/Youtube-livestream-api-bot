@@ -67,23 +67,15 @@ def get_top_stream_chat_ids(credential_file):
 
     return chatids
 
-def get_live_chat_id_for_stream_now(credential_file):
+def get_live_chat_id_for_stream_now(credential_file, broadcast_id):
     storage = Storage(credential_file)
     credentials = storage.get()
     http = credentials.authorize(httplib2.Http())
     url = "https://www.googleapis.com/youtube/v3/liveBroadcasts?"
-    params = {'part': 'snippet', 'default': 'true'}
+    params = {'part': 'snippet', 'id':broadcast_id}
     params = urlencode(params)
     resp, data = _json_request(http, url + params)
-    return data['items'][0]['snippet']['liveChatId']
-
-def custom_get_live_chat_id_for_stream_now(credential):
-    credentials = credential
-    http = credentials.authorize(httplib2.Http())
-    url = "https://www.googleapis.com/youtube/v3/liveBroadcasts?"
-    params = {'part': 'snippet', 'default': 'true'}
-    params = urlencode(params)
-    resp, data = _json_request(http, url + params)
+   
     return data['items'][0]['snippet']['liveChatId']
 
 

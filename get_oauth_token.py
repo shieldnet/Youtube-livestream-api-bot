@@ -1,31 +1,35 @@
 #!/usr/bin/env python
 import webbrowser
 
-import httplib2
 from oauth2client import client
 from oauth2client.file import Storage
+import google_auth_oauthlib.flow
+import googleapiclient.discovery
+import googleapiclient.errors
 
 from google_auth_oauthlib.flow import InstalledAppFlow
 
 # 나중에, 이거 크레덴셜이 자꾸 없다고 하니까 로컬서버에서 연 다음 다른 방법으로
 # 크레덴셜 오브젝트를 가져오는 방향으로 구현해보자
 
-flow2 = InstalledAppFlow.from_client_secrets_file(
-    'client_secrets.json',
-    scopes=['https://www.googleapis.com/auth/youtube', 'https://www.googleapis.com/auth/youtube.force-ssl'])
+api_service_name = "youtube"
+api_version = "v3"
+client_secrets_file = "client_secrets.json"
 
-if not hasattr(__builtins__,'raw_input'):
-    # Python 3
-    raw_input = input
+scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
+#scopes=['https://www.googleapis.com/auth/youtube', 'https://www.googleapis.com/auth/youtube.force-ssl'])
+flow = InstalledAppFlow.from_client_secrets_file(
+    client_secrets_file,
+    scopes)
+credentials = flow.run_console()
+youtube = googleapiclient.discovery.build(api_service_name, api_version, credentials=credentials)
 
-credentials = flow2.run_local_server(host='localhost',
-    port=8080, 
-    authorization_prompt_message='Please visit this URL: {url}', 
-    success_message='The auth flow is complete; you may close this window.',
-    open_browser=True)
+request = youtube.liveBroadcasts().list(
+    part="snippet",
+    id="BRHNUf8gTQE")
 
-print(credentials)
- 
+response = request.execute()
+print(response)
 
 """
 storage = Storage("oauth_creds")
