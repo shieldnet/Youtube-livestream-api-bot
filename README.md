@@ -27,7 +27,7 @@ pip install oauth2client python-dateutil httplib2 google_auth_oauthlib google-ap
 
 ### OAuth2.0 Token 발급받기
 * repository에 있는 `get_auth.py`를 실행해줍니다. 이때, 위에서 발급받은 `client_secrets.json`이 같은 폴더에 있어야 합니다.
-
+* 브라우저가 실행되면, 로그인을 한 후 발급되는 API Key를 Console/Popup Window에 입력해 oauth_cred파일을 생성합니다.
 ### 실행하기
 * Token을 발급받았다면. 다음과 같은 명령어로 chatbot을 실행할 수 있습니다.
 ```python3 bot.py <BROADCAST_ID>```
