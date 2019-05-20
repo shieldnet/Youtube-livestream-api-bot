@@ -1,9 +1,14 @@
 # DDokDDok(똑똑)
 
-## DDokDDok Is..
+## DDokDDok이란?
 * Python 기반의 유튜브 API입니다.
 * Python 2.7+, Python 3.5+에서 동작하는것을 확인했습니다.
 * 독립적으로 실행할 수 있으나, 배포판에서는 통합 UI를 제공합니다.(javafx사용)
+
+## What this project does
+* 시청자가 입력한 !<명령> 에 반응하는 Chatbot입니다.
+* 비속어 필터링은 본 모듈에는 부착되어 있지 않으며, Java 통합 모듈에서만 동작합니다.
+* 기본적으로 !업타임 명령어가 탑재되어 있습니다.
 
 ## Dependency
 * Python 3.5+ 이상 사용자.
@@ -31,6 +36,8 @@ pip install oauth2client python-dateutil httplib2 google_auth_oauthlib google-ap
 ### 실행하기
 * Token을 발급받았다면. 다음과 같은 명령어로 chatbot을 실행할 수 있습니다.
 ```python3 bot.py <BROADCAST_ID>```
+* 본 bot에 대한 명령어와, 대응은 `DDokDDokCommand.py`에서 수정하실 수 있습니다. 기본적으로는 `!업타임` 명령어가 탑재되어있습니다.
+* 그 외, 함수화된 모듈을 사용하는 법은 [Developement Reference Docs]()를 참고해주십시오. (* TODO *)
 
 ## 참고
 * Youtube OAuth2.0 구현에 대한 사항은 이곳을 참고하시면 좋습니다.
