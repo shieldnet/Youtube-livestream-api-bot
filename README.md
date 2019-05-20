@@ -1,5 +1,5 @@
 # DDokDDok(똑똑)
-==============
+
 ## DDokDDok Is..
 * Python 기반의 유튜브 API입니다.
 * Python 2.7+, Python 3.5+에서 동작하는것을 확인했습니다.
@@ -19,7 +19,7 @@ pip install oauth2client python-dateutil httplib2 google_auth_oauthlib google-ap
 * Youtube Chatbot을 사용하는 모든 사용자는 `Youtube API`와 `Google OAuth`에 등록(사용 신청)되어 있어야 합니다.
 
 ### API Key, OAuth2.0 ID
-* [https://console.developers.google.com/apis](Google API Console)에 접속해서 왼쪽 사이드 메뉴의 `라이브러리`를 선택합니다.
+* [Google API Console](https://console.developers.google.com/apis)에 접속해서 왼쪽 사이드 메뉴의 `라이브러리`를 선택합니다.
 * 라이브러리에서 Youtube Data API를 신청하고, 원래 메뉴로 돌아와 API Key를 발급받습니다.
 * 그 후, `OAuth 2.0 클라이언트 ID`를 발급받습니다.
  * OAuth의 어플리케이션은, `기타 어플리케이션`을 사용합니다.
@@ -34,4 +34,4 @@ pip install oauth2client python-dateutil httplib2 google_auth_oauthlib google-ap
 
 ## 참고
 * Youtube OAuth2.0 구현에 대한 사항은 이곳을 참고하시면 좋습니다.
-* [https://developers.google.com/youtube/v3/guides/authentication?hl=ko](Implement Youtube OAuth2.0)
+* [Implement Youtube OAuth2.0](https://developers.google.com/youtube/v3/guides/authentication?hl=ko)
