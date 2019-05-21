@@ -30,6 +30,8 @@ pip install oauth2client python-dateutil httplib2 google_auth_oauthlib google-ap
  * OAuth의 어플리케이션은, `기타 어플리케이션`을 사용합니다.
  * ID를 발급 받은 후, 화면 상단의 `JSON 다운로드` 버튼을 눌러 `client_secrets.json`파일로 저장합니다.
 
+> Release Version(Javafx)을 사용하시는 분께서는, 이 곳 까지만 진행하시면 됩니다.
+
 ### OAuth2.0 Token 발급받기
 * repository에 있는 `get_auth.py`를 실행해줍니다. 이때, 위에서 발급받은 `client_secrets.json`이 같은 폴더에 있어야 합니다.
 * 브라우저가 실행되면, 로그인을 한 후 발급되는 API Key를 Console/Popup Window에 입력해 oauth_cred파일을 생성합니다.
