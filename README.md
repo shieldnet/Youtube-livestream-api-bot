@@ -39,6 +39,12 @@ pip install oauth2client python-dateutil httplib2 google_auth_oauthlib google-ap
 * 본 bot에 대한 명령어와, 대응은 `DDokDDokCommand.py`에서 수정하실 수 있습니다. 기본적으로는 `!업타임` 명령어가 탑재되어있습니다.
 * 그 외, 함수화된 모듈을 사용하는 법은 [Developement Reference Docs]()를 참고해주십시오. (* TODO *)
 
+### For Developer
+* 각 모듈에 대한 설명
+ * `get_auth_key.py`모듈은 `client_secrets.json`파일의 정보를 기반으로, OAuth2.0 Key를 생성해줍니다. 왜냐하면, API를 Call할 때 마다 OAuth인증을 받기엔 번거로우므로, 파일로 저장해 3600초(1시간)동안 유효하게 하면 bot을 사용하는 동안은 직접적인 갱신 없이 사용 가능하기 때문입니다.
+ * `bot.py`는 bot을 실제로 Youtube Streaming Livechat에 반응하게 하는 모듈입니다. `python bot.py <BROADCAST_ID>`형식으로 실행해야 합니다.
+ * `youtubechat`은 YoutubeLiveStream Library가 제공하는 API들을 기능별로 세분화해서 함수화 해둔 라이브러리입니다. bot.py를 작동하는데 사용됩니다.
+
 ## 참고
 * Youtube OAuth2.0 구현에 대한 사항은 이곳을 참고하시면 좋습니다.
 * [Implement Youtube OAuth2.0](https://developers.google.com/youtube/v3/guides/authentication?hl=ko)
