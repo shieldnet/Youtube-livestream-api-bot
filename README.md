@@ -1,4 +1,4 @@
-# DDokDDok(똑똑)
+# DDokDDok(똑똑)[![Build Status](https://travis-ci.org/cauchatbot/Youtube.svg?branch=master)](https://travis-ci.org/cauchatbot/Youtube)
 
 ## DDokDDok이란?
 * Python 기반의 유튜브 API입니다.
