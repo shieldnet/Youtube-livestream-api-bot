@@ -90,7 +90,7 @@ def get_live_chat_id_for_broadcast_id(broadcastId, credential_file):
     return data['items'][0]['snippet']['liveChatId']
 
 
-def get_broadcast_start_time(broadcastId, credential_file):
+def get_broadcast_elapsed_time(broadcastId, credential_file):
     storage = Storage(credential_file)
     credentials = storage.get()
     http = credentials.authorize(httplib2.Http())
