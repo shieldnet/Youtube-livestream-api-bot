@@ -3,7 +3,7 @@
 from time import sleep
 import sys
 from youtubechat import YoutubeLiveChat, get_live_chat_id_for_broadcast_id, get_live_chat_id_for_stream_now
-
+from youtubechat import get_broadcast_start_time
 argv = sys.argv
 
 if len(argv) is not 2:
@@ -20,12 +20,21 @@ print(livechat_id)
 chat_obj = YoutubeLiveChat("oauth_creds", [livechat_id])
 
 
+def uptime(chatid):
+    response = '방송이 시작된 지, '+get_broadcast_start_time(broadcast_id,"oauth_creds") + '이 지났습니다.';
+    chat_obj.send_message(response, chatid)
+
 def respond(msgs, chatid):
     for msg in msgs:
         print(msg)
-        if msg.message_text[0] is '!':
+        if msg.message_text.find('!업타임') != -1:
+            uptime(chatid)
+        elif msg.message_text[0] == '!':
             chat_obj.send_message("BOT: " +msg.message_text, chatid)
             msg.delete()
+        else:
+            print(msg)
+
 
 try:
     chat_obj.start()
@@ -34,3 +43,4 @@ try:
 
 finally:
     chat_obj.stop()
+

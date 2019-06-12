@@ -90,6 +90,24 @@ def get_live_chat_id_for_broadcast_id(broadcastId, credential_file):
     return data['items'][0]['snippet']['liveChatId']
 
 
+def get_broadcast_start_time(broadcastId, credential_file):
+    storage = Storage(credential_file)
+    credentials = storage.get()
+    http = credentials.authorize(httplib2.Http())
+    url = "https://www.googleapis.com/youtube/v3/liveBroadcasts?"
+    params = {'part': 'snippet', 'id': broadcastId}
+    params = urlencode(params)
+    resp, data = _json_request(http, url + params)
+    #2019-06-12T11:07:59.000Z
+    nowdatastr =  data['items'][0]['snippet']['actualStartTime']
+    converted_date = datetime.strptime(nowdatastr, "%Y-%m-%dT%H:%M:%S.000Z")
+    now_time = datetime.now()-converted_date - timedelta(hours=9)
+    now_time_sec = now_time.seconds
+    hours, remainder = divmod(now_time_sec, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    return '{:02}:{:02}:{:02}'.format(int(hours), int(minutes), int(seconds))
+
+
 def channelid_to_name(channelId, http):
     url = "https://www.googleapis.com/youtube/v3/channels?part=snippet&id={0}".format(channelId)
     response, data = _json_request(http, url)
