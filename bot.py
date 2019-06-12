@@ -31,7 +31,7 @@ def log_chat(msg_obj):
 
     _author = msg_obj.author.display_name
     _displayed_msg = msg_obj.display_message
-    _published_time = str(msg_obj.published_at.strftime("%Y%m%d-%H:%M:%S"))
+    _published_time = str(msg_obj.published_at.strftime("%Y%m%d-%H-%M-%S"))
     f.write('['+_published_time+'] ' + _author +' : ' +_displayed_msg+'\n')
     f.close()
 

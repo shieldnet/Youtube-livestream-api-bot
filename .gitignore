@@ -7,6 +7,10 @@ oauth_creds
 # C extensions
 *.so
 
+
+#logFile
+*.txt
+
 # Distribution / packaging
 .Python
 build/
