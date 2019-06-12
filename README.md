@@ -30,6 +30,8 @@ pip install oauth2client python-dateutil httplib2 google_auth_oauthlib google-ap
  * OAuth의 어플리케이션은, `기타 어플리케이션`을 사용합니다.
  * ID를 발급 받은 후, 화면 상단의 `JSON 다운로드` 버튼을 눌러 `client_secrets.json`파일로 저장합니다.
 
+> Release Version(Javafx)을 사용하시는 분께서는, 이 곳 까지만 진행하시면 됩니다.
+
 ### OAuth2.0 Token 발급받기
 * repository에 있는 `get_auth.py`를 실행해줍니다. 이때, 위에서 발급받은 `client_secrets.json`이 같은 폴더에 있어야 합니다.
 * 브라우저가 실행되면, 로그인을 한 후 발급되는 API Key를 Console/Popup Window에 입력해 oauth_cred파일을 생성합니다.
@@ -38,6 +40,12 @@ pip install oauth2client python-dateutil httplib2 google_auth_oauthlib google-ap
 ```python3 bot.py <BROADCAST_ID>```
 * 본 bot에 대한 명령어와, 대응은 `DDokDDokCommand.py`에서 수정하실 수 있습니다. 기본적으로는 `!업타임` 명령어가 탑재되어있습니다.
 * 그 외, 함수화된 모듈을 사용하는 법은 [Developement Reference Docs]()를 참고해주십시오. (* TODO *)
+
+### For Developer
+* 각 모듈에 대한 설명
+ * `get_auth_key.py`모듈은 `client_secrets.json`파일의 정보를 기반으로, OAuth2.0 Key를 생성해줍니다. 왜냐하면, API를 Call할 때 마다 OAuth인증을 받기엔 번거로우므로, 파일로 저장해 3600초(1시간)동안 유효하게 하면 bot을 사용하는 동안은 직접적인 갱신 없이 사용 가능하기 때문입니다.
+ * `bot.py`는 bot을 실제로 Youtube Streaming Livechat에 반응하게 하는 모듈입니다. `python bot.py <BROADCAST_ID>`형식으로 실행해야 합니다.
+ * `youtubechat`은 YoutubeLiveStream Library가 제공하는 API들을 기능별로 세분화해서 함수화 해둔 라이브러리입니다. bot.py를 작동하는데 사용됩니다.
 
 ## 참고
 * Youtube OAuth2.0 구현에 대한 사항은 이곳을 참고하시면 좋습니다.

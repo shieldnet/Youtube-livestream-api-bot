@@ -1,0 +1,12 @@
+language: python
+python:
+  - "3.5"
+  - "3.6"
+# command to install dependencies
+install:
+  - pip install oauth2client python-dateutil httplib2 google_auth_oauthlib google-api-python-client
+# command to run tests
+script:
+  - python3 get_auth_key.py || python get_auth_key.py
+  - python3 bot.py || python bot.py
+  - python3 DDokDDokCommand.py || python DDokDDokCommand.py
