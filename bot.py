@@ -8,7 +8,7 @@ argv = sys.argv
 
 if len(argv) is not 2:
     print("Use like bot.py <broadcast_id>")
-    exit(-1)
+    exit(0)
 
 broadcast_id = str(argv[1])
 
