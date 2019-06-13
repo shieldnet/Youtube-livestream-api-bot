@@ -19,7 +19,7 @@ livechat_id = get_live_chat_id_for_broadcast_id(broadcast_id,"oauth_creds")
 print(livechat_id)
 
 chat_obj = YoutubeLiveChat("oauth_creds", [livechat_id])
-file_name = datetime.now().strftime("%Y%m%d-%H:%M:%S.txt")
+file_name = datetime.now().strftime("%Y%m%d-%H-%M-%S.txt")
 
 # Logging Function
 def log_chat(msg_obj):
