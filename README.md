@@ -9,16 +9,17 @@
 * 시청자가 입력한 !<명령> 에 반응하는 Chatbot입니다.
 * 비속어 필터링은 본 모듈에는 부착되어 있지 않으며, Java 통합 모듈에서만 동작합니다.
 * 기본적으로 !업타임 명령어가 탑재되어 있습니다.
+* 현재 !추가, !업타임, !앵무새, 따라웃기, 채팅 로그 기능이 탑재되어 있습니다.
 
 ## Dependency
 * Python 3.5+ 이상 사용자.
 ```
-pip3 install oauth2client python-dateutil httplib2 google_auth_oauthlib google-api-python-client
+pip3 install oauth2client python-dateutil httplib2 google_auth_oauthlib google-api-python-client pickle-mixin
 ```
 * Python 2.7+ 이상 사용자.
 ```
-pip install oauth2client python-dateutil httplib2 google_auth_oauthlib google-api-python-client
-```
+pip install oauth2client python-dateutil httplib2 google_auth_oauthlib google-api-python-client pickle-mixin
+``` 
 
 ## Prerequisite
 * Youtube Chatbot을 사용하는 모든 사용자는 `Youtube API`와 `Google OAuth`에 등록(사용 신청)되어 있어야 합니다.
