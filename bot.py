@@ -3,6 +3,7 @@
 from time import sleep
 from datetime import datetime
 import sys
+import pickle
 from youtubechat import YoutubeLiveChat, get_live_chat_id_for_broadcast_id, get_live_chat_id_for_stream_now
 from youtubechat import get_broadcast_elapsed_time
 argv = sys.argv
@@ -19,7 +20,27 @@ livechat_id = get_live_chat_id_for_broadcast_id(broadcast_id,"oauth_creds")
 print(livechat_id)
 
 chat_obj = YoutubeLiveChat("oauth_creds", [livechat_id])
-file_name = datetime.now().strftime("%Y%m%d-%H:%M:%S.txt")
+file_name = datetime.now().strftime("%Y%m%d-%H-%M-%S.txt")
+
+
+# Save custom commands to file
+def save_custom_commands():
+    f = open("custom_commands.dat", "wb")
+    pickle.dump(custom_commands, f)
+    f.close()
+
+
+# Load custom commands from file
+def load_custom_commands():
+    try:
+        f = open("custom_commands.dat", "rb")
+        obj = pickle.load(f)
+        f.close()
+        return obj
+    except:
+        return dict()
+
+custom_commands = load_custom_commands()
 
 # Logging Function
 def log_chat(msg_obj):
@@ -47,11 +68,40 @@ def respond(msgs, chatid):
     for msg in msgs:
         print(msg)
         log_chat(msg)
+        auth = msg.author.is_chat_owner or msg.author.is_chat_moderator
         if msg.message_text.find('!업타임') != -1:
             uptime(chatid)
         elif msg.message_text.find('!앵무새') != -1:
             chat_obj.send_message("DDOKDDOK "+msg.message_text[4:], chatid)
             msg.delete()
+        elif msg.message_text.split()[0] == '!추가' and len(msg.message_text.split()) >= 3 and auth:
+            key = msg.message_text.split()[1]
+            if key not in custom_commands:
+                contents = ' '.join(msg.message_text.split()[2:])
+                custom_commands[key] = contents
+                save_custom_commands()
+                chat_obj.send_message('"' + key + '" 커스텀 명령어가 추가되었습니다.', chatid)
+            else:
+                chat_obj.send_message('"' + key + '" 커스텀 명령어가 이미 존재합니다.', chatid)
+        elif msg.message_text.split()[0] == '!수정' and len(msg.message_text.split()) >= 3 and auth:
+            key = msg.message_text.split()[1]
+            if key in custom_commands:
+                contents = ' '.join(msg.message_text.split()[2:])
+                custom_commands[key] = contents
+                save_custom_commands()
+                chat_obj.send_message('"' + key + '" 커스텀 명령어가 수정되었습니다.', chatid)
+            else:
+                chat_obj.send_message('"' + key + '" 커스텀 명령어가 존재하지 않습니다.', chatid)
+        elif msg.message_text.split()[0] == '!삭제' and len(msg.message_text.split()) == 2 and auth:
+            key = msg.message_text.split()[1]
+            if key in custom_commands:
+                custom_commands.pop(key)
+                save_custom_commands()
+                chat_obj.send_message('"' + key + '" 커스텀 명령어가 삭제되었습니다.', chatid)
+            else:
+                chat_obj.send_message('"' + key + '" 커스텀 명령어가 존재하지 않습니다.', chatid)
+        elif msg.message_text.strip() in custom_commands:
+            chat_obj.send_message(custom_commands[msg.message_text.strip()], chatid)
         else:
             True
             #Nothing
