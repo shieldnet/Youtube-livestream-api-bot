@@ -5,6 +5,7 @@ from datetime import datetime
 import sys
 import pickle
 import re
+import random
 from youtubechat import YoutubeLiveChat, get_live_chat_id_for_broadcast_id, get_live_chat_id_for_stream_now
 from youtubechat import get_broadcast_elapsed_time
 argv = sys.argv
@@ -88,6 +89,19 @@ def respond(msgs, chatid):
             real_msg_pos = contents.index('!앵무새') + 1
             chat_obj.send_message("DDOKDDOK " + ''.join(contents[real_msg_pos:]).strip(), chatid)
             msg.delete()
+
+        elif msg.message_text.split()[0] == '!주사위':
+            try:
+                if len(msg.message_text.split()) < 2:
+                    sides = 6
+                else:
+                    sides = int(msg.message_text.split()[1])
+            except:
+                sides = 6
+            result = random.SystemRandom().randint(1, max(1, sides))
+
+            special_kor = [2, 4, 5, 9]
+            chat_obj.send_message('주사위에서 %d%s 나왔습니다!' % (result, ['이', '가'][1 if result % 10 in special_kor else 0]), chatid)
 
         elif msg.message_text.split()[0] == '!추가' and len(msg.message_text.split()) >= 3 and auth:
             key = msg.message_text.split()[1]
