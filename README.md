@@ -14,11 +14,11 @@
 ## Dependency
 * Python 3.5+ 이상 사용자.
 ```
-pip3 install oauth2client python-dateutil httplib2 google_auth_oauthlib google-api-python-client pickle-mixin
+pip3 install oauth2client python-dateutil httplib2 google_auth_oauthlib google-api-python-client
 ```
 * Python 2.7+ 이상 사용자.
 ```
-pip install oauth2client python-dateutil httplib2 google_auth_oauthlib google-api-python-client pickle-mixin
+pip install oauth2client python-dateutil httplib2 google_auth_oauthlib google-api-python-client
 ``` 
 
 ## Prerequisite
