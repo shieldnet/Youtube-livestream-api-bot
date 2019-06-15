@@ -4,6 +4,7 @@ from time import sleep
 from datetime import datetime
 import sys
 import pickle
+import re
 from youtubechat import YoutubeLiveChat, get_live_chat_id_for_broadcast_id, get_live_chat_id_for_stream_now
 from youtubechat import get_broadcast_elapsed_time
 argv = sys.argv
@@ -79,11 +80,13 @@ def respond(msgs, chatid):
         log_chat(msg)
         auth = msg.author.is_chat_owner or msg.author.is_chat_moderator
 
-        if msg.message_text.find('!업타임') != -1:
+        if msg.message_text.strip() == '!업타임':
             uptime(chatid)
 
-        elif msg.message_text.find('!앵무새') != -1:
-            chat_obj.send_message("DDOKDDOK "+msg.message_text[4:], chatid)
+        elif msg.message_text.split()[0] == '!앵무새' and len(msg.message_text.split()) >= 2:
+            contents = re.split('(\\s+)', msg.message_text)
+            real_msg_pos = contents.index('!앵무새') + 1
+            chat_obj.send_message("DDOKDDOK " + ''.join(contents[real_msg_pos:]).strip(), chatid)
             msg.delete()
 
         elif msg.message_text.split()[0] == '!추가' and len(msg.message_text.split()) >= 3 and auth:
