@@ -1,4 +1,4 @@
-# DDokDDok(똑똑)[![Build Status](https://travis-ci.org/cauchatbot/Youtube.svg?branch=master)](https://travis-ci.org/cauchatbot/Youtube)
+# DDokDDok(똑똑)[![Build Status](https://travis-ci.org/shieldnet/Youtube-livestream-api-bot.svg?branch=master)](https://travis-ci.org/shieldnet/Youtube-livestream-api-bot)
 
 ## DDokDDok이란?
 * Python 기반의 유튜브 API입니다.
